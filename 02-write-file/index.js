@@ -5,11 +5,13 @@ const {stdin, stdout, exit} = process;
 stdout.write('Введите текст:');
 stdin.on('data', (data) => {
   if (data.toString().trim() === 'exit') {
-    exit();
+    quit();
   }
   output.write(data);
 });
-process.on('exit', () => {
+
+const quit = () => {
   stdout.write('До свидания!');
-});
-  
+  exit();
+};
+process.on('SIGINT', quit); 
