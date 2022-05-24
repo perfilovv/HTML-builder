@@ -47,7 +47,9 @@ const recurceCopy = (dir, exit) => {
               if (err) throw err;
             });
             recurceCopy(`${dir}\\${file.name}`, path.join(exit, file.name)); 
-          } 
+          } else {
+            recurceCopy(`${dir}\\${file.name}`, path.join(exit, file.name));
+          }
         });
       } else {
         fs.copyFile(`${dir}\\${file.name}`, `${exit}\\${file.name}`, (err) => { //Копируем файлы
@@ -76,7 +78,9 @@ fs.stat(assetsCopy, (err) => {
       if (err) throw err;
     });
     recurceCopy(assets, assetsCopy);
-  } 
+  } else {
+    recurceCopy(assets, assetsCopy);
+  }
 });
 
 const fullBuild = async() => { 
